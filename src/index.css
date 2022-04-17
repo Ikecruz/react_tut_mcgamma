@@ -51,6 +51,26 @@
     margin-left: 10px;
 }
 
+.loader_contain{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error_contain{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.error_contain i{
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
 .home .hero_section{
     height: 500px;
     /* background: red; */

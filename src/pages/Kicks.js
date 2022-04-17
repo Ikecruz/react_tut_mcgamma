@@ -1,5 +1,8 @@
 import { Grid } from "@mantine/core"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import Error from "../components/Error"
+import Kickcard from "../components/Kickcard"
+import Loading from "../components/Loading"
 import Navbar from "../components/Navbar"
 import kicksImg from "../images/kicks.png"
 
@@ -10,6 +13,25 @@ const Kicks = () => {
     const getColor = () => {
         return colors[Math.floor(Math.random() * colors.length)]
     }
+
+    const [isPending, setIsPending] = useState(true)
+
+    const [isError, setIsError] = useState(false)
+
+    const [stocks, setStocks] = useState()
+
+    useEffect(() => {
+
+        fetch('https://my-json-server.typicode.com/Ikecruz/react_tut_mcgamma/stocks')
+        .then((res) => res.json())
+        .then((data) => setStocks(data))
+        .catch((err) => {
+            setIsError(true)
+            console.log(err)
+        })
+        .finally(setIsPending(false))
+
+    }, [])
 
     return <>
     
@@ -30,44 +52,30 @@ const Kicks = () => {
                             <p>lifestyle kicks</p>
                         </div>
                         <div className="cards_contain">
-                            <Grid gutter="lg">
-                                <Grid.Col span={6} md={4}>
-                                    <Link to="/kick/1" className="kick_card">
-                                        <div className="kick_img" style={{background: getColor()}}>
-                                            <img src="https://images.footlocker.com/is/image/FLEU/314103886504?wid=231&hei=231&fmt=png-alpha" alt="" />
-                                        </div>
-                                        <p className="kick_name">Nike vandu supreme</p>
-                                        <p className="kick_price">$ 300</p>
-                                    </Link>
-                                </Grid.Col>
-                                <Grid.Col span={6} md={4}>
-                                    <div className="kick_card">
-                                        <div className="kick_img" style={{background: getColor()}}>
-                                            <img src="https://images.footlocker.com/is/image/FLEU/314101995604?wid=231&hei=231&fmt=png-alpha" alt="" />
-                                        </div>
-                                        <p className="kick_name">Nike vandu supreme</p>
-                                        <p className="kick_price">$ 300</p>
-                                    </div>
-                                </Grid.Col>
-                                <Grid.Col span={6} md={4}>
-                                    <div className="kick_card">
-                                        <div className="kick_img" style={{background: getColor()}}>
-                                            <img src="https://images.footlocker.com/is/image/FLEU/314101995604?wid=231&hei=231&fmt=png-alpha" alt="" />
-                                        </div>
-                                        <p className="kick_name">Nike vandu supreme</p>
-                                        <p className="kick_price">$ 300</p>
-                                    </div>
-                                </Grid.Col>
-                                <Grid.Col span={6} md={4}>
-                                    <div className="kick_card">
-                                        <div className="kick_img" style={{background: getColor()}}>
-                                            <img src="https://images.footlocker.com/is/image/FLEU/314101995604?wid=231&hei=231&fmt=png-alpha" alt="" />
-                                        </div>
-                                        <p className="kick_name">Nike vandu supreme</p>
-                                        <p className="kick_price">$ 300</p>
-                                    </div>
-                                </Grid.Col>
-                            </Grid>
+                            {
+                                isPending &&
+                                <Loading />
+                            }
+                            
+                            {
+                                (!isPending && !isError) &&
+                                <Grid gutter="lg">
+
+                                    {
+                                        stocks?.map((stock) => (
+                                            <Grid.Col span={6} md={4} key={stock.id}>
+                                                <Kickcard id={stock.id} image={stock.image} name={stock.name} price={stock.price} background={getColor()} />
+                                            </Grid.Col>
+                                        ))
+                                    }
+
+                                </Grid>
+                            }
+                            
+                            {
+                                isError &&
+                                <Error />
+                            }
                         </div>
                     </Grid.Col>
                 </Grid>

@@ -1,45 +1,86 @@
 import { Grid } from "@mantine/core"
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import Error from "../components/Error"
+import Loading from "../components/Loading"
 import Navbar from "../components/Navbar"
 
 const Kickdetail = () => {
+
+    const {id} = useParams()
+
+    const [isPending, setIsPending] = useState(true)
+
+    const [isError, setIsError] = useState(false)
+
+    const [kick, setKick] = useState()
+
+    useEffect(() => {
+
+        fetch(`https://my-json-server.typicode.com/Ikecruz/react_tut_mcgamma/stocks/${id}`)
+        .then((res) => res.json())
+        .then((data) => setKick(data))
+        .catch((err) => {
+            setIsError(true)
+            console.log(err)
+        })
+        .finally(setIsPending(false))
+
+    }, [id])
+
     return <>
     
         <Navbar />
         <div className="kick_detail">
-            <div className="kick_container">
-                <Grid gutter="none" style={{height: "100%"}}>
 
-                    <Grid.Col span={12} md={6}>
-                        <div className="kick_name_container">
-                            <p className="kick_name">Nike vandu supreme</p>
-                            <p className="description">Our shoes fuse together an insole that cushions every move, laces that you will never need to tie again, and an odor-fighting copper thread lining.</p>
-                            <p className="kick_price">$ 200</p>
+            {
+                isPending &&
+                <Loading />
+            }
 
-                            <div className="btn_contain">
-                                <button className="cart_btn">
-                                    <i className="fal fa-shopping-bag"></i> &nbsp; Add to cart 
-                                </button>
-                                <button className="love_btn">
-                                    <i className="fal fa-heart"></i>
-                                </button>
+            {
+                (!isPending && !isError && kick) &&
+                <div className="kick_container">
+                    <Grid gutter="none" style={{height: "100%"}}>
+
+                        <Grid.Col span={12} md={6}>
+                            <div className="kick_name_container">
+                                <p className="kick_name">{kick.name}</p>
+                                <p className="description">Our shoes fuse together an insole that cushions every move, laces that you will never need to tie again, and an odor-fighting copper thread lining.</p>
+                                <p className="kick_price">$ {kick.price}</p>
+
+                                <div className="btn_contain">
+                                    <button className="cart_btn">
+                                        <i className="fal fa-shopping-bag"></i> &nbsp; Add to cart 
+                                    </button>
+                                    <button className="love_btn">
+                                        <i className="fal fa-heart"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </Grid.Col>
+                        </Grid.Col>
 
-                    <Grid.Col span={12} md={6}>
+                        <Grid.Col span={12} md={6}>
 
-                        <div className="kick_size_container">
-                            <p className="size">7</p>
-                        </div>
+                            <div className="kick_size_container">
+                                <p className="size">{kick.size}</p>
+                            </div>
 
-                    </Grid.Col>
+                        </Grid.Col>
 
-                </Grid>
+                    </Grid>
 
-                <div className="kick_img">
-                    <img src="https://images.footlocker.com/is/image/FLEU/314104017604_01?wid=503&hei=503&fmt=png-alpha" alt="" />
+                    <div className="kick_img">
+                        <img src={kick.image} alt="" />
+                    </div>
                 </div>
-            </div>
+            }
+
+            {
+                isError &&
+                <Error />
+            }
+            
         </div>
     
     </>
