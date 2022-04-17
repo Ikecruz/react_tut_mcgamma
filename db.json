@@ -1,8 +1,77 @@
 {
-    "posts": [
+    "stocks": [
       {
         "id": 1,
-        "title": "hello"
+        "name": "Jordan One Take 3",
+        "price": 89.99,
+        "size": 8,
+        "image": "https://images.footlocker.com/is/image/FLEU/314104195004_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 2,
+        "name": "Jordan Stay Loyal",
+        "price": 94.99,
+        "size": 6,
+        "image": "https://images.footlocker.com/is/image/FLEU/314104016804_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 3,
+        "name": "Nike Huarache",
+        "price": 109.99,
+        "size": 4,
+        "image": "https://images.footlocker.com/is/image/FLEU/315242169902_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 4,
+        "name": "Nike Air Max Dawn Sum Bright",
+        "price": 104.99,
+        "size": 7,
+        "image": "https://images.footlocker.com/is/image/FLEU/314215428104_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 5,
+        "name": "Nike Dunk High",
+        "price": 119.99,
+        "size": 7,
+        "image": "https://images.footlocker.com/is/image/FLEU/314103883204_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 6,
+        "name": "HUB Glide",
+        "price": 109.99,
+        "size": 4,
+        "image": "https://images.footlocker.com/is/image/FLEU/315214124802_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 7,
+        "name": "Nike React",
+        "price": 119.99,
+        "size": 7,
+        "image": "https://images.footlocker.com/is/image/FLEU/314208478504_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 8,
+        "name": "Nike React Vision",
+        "price": 114.99,
+        "size": 4,
+        "image": "https://images.footlocker.com/is/image/FLEU/315241239102_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 9,
+        "name": "Nike Air Force 1 Low",
+        "price": 119.99,
+        "size": 6,
+        "image": "https://images.footlocker.com/is/image/FLEU/314103901204_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 10,
+        "name": "Nike Air Force 1 Low",
+        "price": 63.99,
+        "size": 4,
+        "image": "https://images.footlocker.com/is/image/FLEU/316703012704_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 11,
+        "name": "New Balance 725",
+        "price": 99.99,
+        "size": 7,
+        "image": "https://images.footlocker.com/is/image/FLEU/314207206104_01?wid=503&hei=503&fmt=png-alpha"
+      },{
+        "id": 12,
+        "name": "adidas Ice Trae",
+        "price": 109.99,
+        "size": 7,
+        "image": "https://images.footlocker.com/is/image/FLEU/314104359204_01?wid=503&hei=503&fmt=png-alpha"
       }
     ],
     "profile": {
