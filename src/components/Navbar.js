@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const Navbar = () => {
+const Navbar = ({ cartNum, watchListNum }) => {
 
     return <>
     
@@ -12,11 +12,17 @@ const Navbar = () => {
                 <div className="icon_contain">
                     <p className="nav_btn">
                         <i className="fal fa-shopping-bag"></i>
-                        <span>21</span>
+                        {
+                            cartNum > 0 &&
+                            <span>{ cartNum }</span>
+                        }
                     </p>
                     <p className="nav_btn">
                         <i className="fal fa-heart"></i>
-                        {/* <span>0</span> */}
+                        {
+                            watchListNum > 0 &&
+                            <span>{ watchListNum }</span>
+                        }
                     </p>
                 </div>
             </nav>

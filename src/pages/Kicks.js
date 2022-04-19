@@ -6,8 +6,14 @@ import Kickcard from "../components/Kickcard"
 import Loading from "../components/Loading"
 import Navbar from "../components/Navbar"
 import kicksImg from "../images/kicks.png"
+import { countCart } from "../lib/cart"
+import { countWatchList } from "../lib/watchlist"
 
 const Kicks = () => {
+
+    const cartNum = countCart()
+
+    const watchListNum = countWatchList()
 
     const [isPending, setIsPending] = useState(true)
 
@@ -62,7 +68,7 @@ const Kicks = () => {
 
     return <>
     
-        <Navbar />
+        <Navbar cartNum={cartNum} watchListNum={watchListNum} />
         <div className="kicks_page">
             <div className="kicks_contain">
                 <Grid gutter="none">

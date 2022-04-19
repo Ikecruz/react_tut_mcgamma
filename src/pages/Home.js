@@ -2,12 +2,18 @@ import Navbar from "../components/Navbar"
 import nikeRight from "../images/nike_right.png"
 import nikeLeft from "../images/nike_left.png"
 import { Link } from "react-router-dom"
+import { countCart } from "../lib/cart"
+import { countWatchList } from "../lib/watchlist"
 
 const Home = () => {
 
+    const cartNum = countCart()
+
+    const watchListNum = countWatchList()
+
     return <>
     
-        <Navbar />
+        <Navbar cartNum={cartNum} watchListNum={watchListNum} />
         <div className="home">
             <div className="hero_section">
 

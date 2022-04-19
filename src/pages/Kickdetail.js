@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom"
 import Error from "../components/Error"
 import Loading from "../components/Loading"
 import Navbar from "../components/Navbar"
+import { addCart, checkCart, countCart, removeCart } from "../lib/cart"
+import { addWatchList, checkWatchList, countWatchList, removeWatchList } from "../lib/watchlist"
 
 const Kickdetail = () => {
 
@@ -13,7 +15,15 @@ const Kickdetail = () => {
 
     const [isError, setIsError] = useState(false)
 
-    const [kick, setKick] = useState()
+    const [kick, setKick] = useState(null)
+
+    const [cartNum, setCartNum] = useState(countCart())
+
+    const [inCart, setInCart] = useState(checkCart(id))
+
+    const [watchListNum, setWatchListNum] = useState(countWatchList())
+
+    const [inWatchList, setInWatchList] = useState(checkWatchList(id))
 
     useEffect(() => {
 
@@ -28,9 +38,25 @@ const Kickdetail = () => {
 
     }, [id])
 
+    const handleCart = () => {
+        if ( inCart ) removeCart(id)
+        else addCart(kick)
+
+        setInCart(!inCart)
+        setCartNum(countCart())
+    }
+
+    const handleWatchList = () => {
+        if ( inWatchList ) removeWatchList(id)
+        else addWatchList(kick)
+
+        setInWatchList(!inWatchList)
+        setWatchListNum(countWatchList())
+    }
+
     return <>
     
-        <Navbar />
+        <Navbar cartNum={cartNum} watchListNum={watchListNum} />
         <div className="kick_detail">
 
             {
@@ -50,11 +76,13 @@ const Kickdetail = () => {
                                 <p className="kick_price">$ {kick.price}</p>
 
                                 <div className="btn_contain">
-                                    <button className="cart_btn">
-                                        <i className="fal fa-shopping-bag"></i> &nbsp; Add to cart 
+                                    <button className="cart_btn" onClick={handleCart}>
+                                        { inCart && <p><i className="fal fa-times"></i> &nbsp; Remove from Cart</p>  }
+                                        { !inCart && <p><i className="fal fa-shopping-bag"></i> &nbsp; Add to cart</p> } 
                                     </button>
-                                    <button className="love_btn">
-                                        <i className="fal fa-heart"></i>
+                                    <button className="love_btn" onClick={handleWatchList}>
+                                        { inWatchList && <i className="fas fa-heart"></i> }
+                                        { !inWatchList && <i className="fal fa-heart"></i> }
                                     </button>
                                 </div>
                             </div>
